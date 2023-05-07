@@ -1,0 +1,29 @@
+/* PRODUC DETAIL */
+.product-detail {
+    width: 360px;
+    height: calc(100vh - 200px);
+    top: 100px;
+}
+
+/* CHECKOUT SIDE MENU */
+.checkout-side-menu {
+  width: 360px;
+  height: auto;
+  max-height: calc(100vh - 100px);
+  top: 68px;
+  padding-bottom: 20px;
+}
+
+/* RATE STYLES */
+.good {
+    color: orange;
+    height: 16px;
+    width: 16px;
+}
+
+.bad {
+    color: gray;
+    height: 16px;
+    width: 16px;
+}
+

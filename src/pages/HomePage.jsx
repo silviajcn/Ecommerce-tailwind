@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Card, Layout } from '../../components';
+import { Card, Layout, ProductDetail } from '../components';
+import { products } from '../assets/products';
 
-export const Home = () => {
+export const HomePage = () => {
 
     const [items, setItems] = useState(null);
 
@@ -16,11 +17,12 @@ export const Home = () => {
             <h1 className='mb-5 font-bold text-4xl'>Shopi</h1>
             <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
                 {
-                    items?.map((item) => (
+                    products?.map((item) => (
                         <Card key={item.id} item={item} />
                     ))
                 }   
             </div>
+            <ProductDetail />
         </Layout>
     )
 };
