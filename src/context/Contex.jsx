@@ -1,13 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export const Context = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
-
-    // Shopping cart count
-    const [count, setCount] = useState(0);
-    //console.log(count);
 
     // Open/ Close detail
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
@@ -22,13 +18,27 @@ export const ShoppingCartProvider = ({ children }) => {
     // Product detail
     const [showProductDetail, setShowProductDetail] = useState({});
 
-    // Carrito compras
-    const [cartProducts, setCartProducts] = useState([]);
+    // Carrito compras traer
+    const item = localStorage.getItem('comprarShopi');
+    const result = item ? JSON.parse(item) : [];
+
+    // Carrito compras enviar
+    const [cartProducts, setCartProducts] = useState(result);
+    useEffect(() => {
+        localStorage.setItem('comprarShopi', JSON.stringify(cartProducts));
+    }, [cartProducts]);
+
+    // Shopping cart: My order
+    const itemsOrder = localStorage.getItem('checkout');
+    const resultOrders = itemsOrder ? JSON.parse(itemsOrder) : [];
+
+    const [order, setOrder] = useState(resultOrders);
+    useEffect(() => {
+        localStorage.setItem('checkout', JSON.stringify(order));
+    }, [order]);
 
     return (
         <Context.Provider value={{
-            count,
-            setCount,
             openProductDetail,
             closeProductDetail,
             isProductDetailOpen,
@@ -37,8 +47,11 @@ export const ShoppingCartProvider = ({ children }) => {
             cartProducts,
             setCartProducts,
             isCheckoutSideMenuOpen,
+            productsCount: cartProducts.length,
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
+            order,
+            setOrder,
         }}>
             {children}
         </Context.Provider>

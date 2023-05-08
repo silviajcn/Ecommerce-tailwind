@@ -1,7 +1,10 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { Context } from '../context';
 import { OrderCard } from './OrderCard';
+import { totalPrice } from '../utils';
+import { useCreateDate } from '../hooks';
 import './styles.css';
 
 export const CheckoutSideMenu = () => {
@@ -9,9 +12,25 @@ export const CheckoutSideMenu = () => {
     const context = useContext(Context);
     //console.log(context.cartProducts);
 
+    const date = useCreateDate();
+
     const handleDelete = (id) => {
         const filteredProducts = context.cartProducts.filter(prod => prod.id != id);
         context.setCartProducts(filteredProducts);
+    }
+
+    const handleCheckout = () => {
+        const orderToAdd = {
+            id: new Date().getTime(),
+            date: date,
+            products: context.cartProducts,
+            totalProducts: context.cartProducts.length,
+            totalPrice: totalPrice(context.cartProducts)
+        }
+
+        context.setOrder([...context.order, orderToAdd]);
+        context.setCartProducts([]);
+        context.closeCheckoutSideMenu();
     }
 
     return (
@@ -25,6 +44,25 @@ export const CheckoutSideMenu = () => {
                         onClick={() => context.closeCheckoutSideMenu()}></XMarkIcon>
                 </div>
             </div>
+            <div className='px-6 mb-4'>
+                <p className='flex flex-row justify-between items-center'>
+                    <span>Total in the shopping cart:</span>
+                    <span className='font-medium text-2xl text-red-800'>${totalPrice(context.cartProducts)}</span>
+                </p>
+                {
+                    context.productsCount !== 0 &&
+                    <Link to='/my-orders/last'>
+                        <button
+                            type='button'
+                            className='border-2 p-2 rounded-lg w-full mt-3 bg-orange-200' 
+                            onClick={() => handleCheckout()}
+                        >
+                            Buy
+                        </button>
+                    </Link>
+                }
+            </div>
+            <hr className='mb-6' />
             <div className='overflow-y-scroll'>
                 {
                     context.cartProducts.map((prod) => (
@@ -32,7 +70,7 @@ export const CheckoutSideMenu = () => {
                             key={prod.id}
                             id={prod.id}
                             title={prod.title}
-                            imageUrl={prod.images[0]}
+                            imageUrl={prod.images}
                             price={prod.price}
                             handleDelete={handleDelete}
                         />

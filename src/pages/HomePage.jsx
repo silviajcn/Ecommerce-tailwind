@@ -4,17 +4,32 @@ import { products } from '../assets/products';
 
 export const HomePage = () => {
 
-    const [items, setItems] = useState(null);
-
+    const [searchByTitle, setSearchByTitle] = useState(null);
+    console.log(searchByTitle);
     useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
-            .then(resp => resp.json())
-            .then(data => setItems(data))
-    }, []);
+
+    }, [searchByTitle]);
+    
+    // const [items, setItems] = useState(null);
+    // useEffect(() => {
+    //     fetch('https://api.escuelajs.co/api/v1/products')
+    //         .then(resp => resp.json())
+    //         .then(data => setItems(data))
+    // }, []);
 
     return (
         <Layout>
             <h1 className='mb-5 font-bold text-4xl'>Shopi</h1>
+            
+            <form className='w-1/2 mb-8'>
+                <input
+                    type='text'
+                    placeholder='Search product...'
+                    className='border-2 rounded-lg w-full p-3'
+                    onChange={(e) => setSearchByTitle(e.target.value)}
+                />
+            </form>
+
             <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
                 {
                     products?.map((item) => (

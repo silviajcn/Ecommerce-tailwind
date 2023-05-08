@@ -40,7 +40,7 @@ export const NavBar = () => {
                     silvi@platzi.com
                 </li>
                 <li>
-                    <NavLink to='/orders' className={({isActive}) => isActive ? activeStyle : undefined}>Orders</NavLink>
+                    <NavLink to='/my-orders' className={({isActive}) => isActive ? activeStyle : undefined}>My orders</NavLink>
                 </li>
                 <li>
                     <NavLink to='/account' className={({isActive}) => isActive ? activeStyle : undefined}>Account</NavLink>
@@ -49,8 +49,15 @@ export const NavBar = () => {
                     <NavLink to='/sign-in' className={({isActive}) => isActive ? activeStyle : undefined}>Sign in</NavLink>
                 </li>
                 <li className='flex'>
-                    <ShoppingCartIcon className='h-6 w-6 text-black'></ShoppingCartIcon>
-                    <div>{context.count}</div>
+                    <NavLink to='/cart-shopping' className={({isActive}) => isActive ? activeStyle : undefined}>
+                        <ShoppingCartIcon className='h-5 w-5 text-black'></ShoppingCartIcon>
+                    </NavLink>
+                    {
+                        context.productsCount === 0 ?
+                            <div className='flex justify-center items-center text-xs font-semibold'>{context.productsCount}</div>
+                            :
+                            <div className='flex justify-center items-center bg-green-100 w-5 h-5 rounded-full text-xs font-semibold'>{context.productsCount}</div>
+                    }
                 </li>
             </ul>
         </nav>

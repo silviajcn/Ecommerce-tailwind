@@ -10,7 +10,7 @@
   width: 360px;
   height: auto;
   max-height: calc(100vh - 100px);
-  top: 68px;
+  top: 69px;
   padding-bottom: 20px;
 }
 
@@ -27,3 +27,45 @@
     width: 16px;
 }
 
+.border-bottom {
+  border-bottom: 1px solid rgb(184, 184, 184);
+}
+
+/* ------------------------------------------------------------------ */
+/*----- Makes Your Scroll-Bar Thin----*/ 
+/* ------------------------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+/* ::-webkit-scrollbar-track {
+  background: #252525;
+} */
+::-webkit-scrollbar-thumb {
+  background: rgba(175, 175, 175, 0.637);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 102, 102, 0.637);
+}
+/*---Scroll-Bar CSS END-------*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font-size: 100%;
+   vertical-align: baseline;
+   background: transparent;
+}

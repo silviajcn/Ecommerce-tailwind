@@ -50,7 +50,7 @@ export const ProductDetail = () => {
                     className='border-2 p-2 rounded-lg'
                     onClick={() => context.closeProductDetail()}
                 >
-                    Ver más detalles
+                    See more details
                 </button>
             </Link>
         </aside>

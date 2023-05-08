@@ -1,20 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Context } from '../context';
+import { deliveryDate, today } from '../utils';
 import { Layout } from '../components';
 import { ChevronLeftIcon, StarIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
-import { Context } from '../context';
-
-//Delivery Date
-const today = new Date();
-function deliveryDate(date, format,days) {
-    const map = {
-            dd: date.getDate() + days,
-            mm: date.getMonth() + 1,
-            yy: date.getFullYear().toString().slice(-2),
-            yyyy: date.getFullYear()
-    }
-    return format.replace(/dd|mm|yy|yyy/gi, matched => map[matched])
-}
 
 export const DetailProduct = () => {
 
@@ -42,7 +31,6 @@ export const DetailProduct = () => {
 
     // Agregar al carrito
     const addProductsToCart = (productData) => {
-        context.setCount(context.count + 1);
         context.setCartProducts([...context.cartProducts, productData]);
         context.openCheckoutSideMenu();
         console.log(context.cartProducts)
@@ -81,26 +69,26 @@ export const DetailProduct = () => {
                                 <p className={rate >= 5 ? 'good' : 'bad'}><StarIcon /></p>
                             </div>
                             <div className='flex flex-row justify-between'>
-                                <p>Marca: <span>{brand}</span></p>
+                                <p>Brand: <span>{brand}</span></p>
                                 <span className='font-light'>{category}</span>
                             </div>
-                            <p className='font-bold mt-4 flex flex-row justify-end'>Precio: <span className='text-red-800 text-2xl ml-4'>${price}</span></p>
+                            <p className='font-bold mt-4 flex flex-row justify-end'>Price: <span className='text-red-800 text-2xl ml-4'>${price}</span></p>
 
-                            <p className='font-bold mt-4'>Acerca de este artículo</p>
+                            <p className='font-bold mt-4'>About this article</p>
                             <p>{description}</p>
                         </div>
 
                         <div className='w-1/6'>
                             <span className='text-red-800 text-2xl'>${price}</span>
-                            <p>Envio gratis!</p>
-                            <p className='text-xs mb-4'>Llega entre el <span className='font-bold'>{deliveryDate(today, 'dd/mm/yy', 5)} y el {deliveryDate(today, 'dd/mm/yy', 10)}</span></p>
+                            <p>Free shipping!</p>
+                            <p className='text-xs mb-4'>Arrives between <span className='font-bold'>{deliveryDate(today, 'dd/mm/yy', 5)} and el {deliveryDate(today, 'dd/mm/yy', 10)}</span></p>
                             
                             <button
                                 type='button'
-                                className='flex flex-row items-center bg-orange-300 font-bold border-3 py-1 px-2 rounded-lg'
+                                className='flex flex-row items-center bg-orange-200 font-bold border-3 py-1 px-2 rounded-lg'
                                 onClick={() => addProductsToCart(item)}
                             >
-                                <ShoppingCartIcon className='h-5 w-5 text-black mr-1'></ShoppingCartIcon> Agregar
+                                <ShoppingCartIcon className='h-5 w-5 text-black mr-1'></ShoppingCartIcon> Add
                             </button>
                             <button type='button'></button>
                         </div>

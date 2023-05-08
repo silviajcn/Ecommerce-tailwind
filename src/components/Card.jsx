@@ -19,7 +19,6 @@ export const Card = ({ item }) => {
     }
 
     const addProductsToCart = (productData) => {
-        context.setCount(context.count + 1);
         context.setCartProducts([...context.cartProducts, productData]);
         context.closeProductDetail();
         context.openCheckoutSideMenu();
