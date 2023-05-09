@@ -2,10 +2,12 @@ import { useContext } from 'react';
 import { Layout, OrdersCard } from '../components';
 import { Context } from '../context';
 import { Link } from 'react-router-dom';
+import { GoToTop } from '../utils/goToTop';
 
 export const MyOrders = () => {
 
     const context = useContext(Context);
+    GoToTop();
 
     return (
         <Layout>

@@ -23,7 +23,7 @@ export const LastOrderPage = () => {
                             key={prod.id}
                             id={prod.id}
                             title={prod.title}
-                            imageUrl={prod.images}
+                            imageUrl={prod.images[0]}
                             price={prod.price}
                         />
                     ))

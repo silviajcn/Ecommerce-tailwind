@@ -1,9 +1,13 @@
 import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { products } from '../assets/products';
 
 export const Context = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
+    
+    // Items
+    const [items, setItems] = useState(products);
 
     // Open/ Close detail
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
@@ -16,7 +20,12 @@ export const ShoppingCartProvider = ({ children }) => {
     const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
 
     // Product detail
-    const [showProductDetail, setShowProductDetail] = useState({});
+    const detailItem = localStorage.getItem('productDetail');
+    const productDetail = detailItem ? JSON.parse(detailItem) : {};
+    
+    const [showProductDetail, setShowProductDetail] = useState(productDetail);
+    localStorage.setItem('productDetail', JSON.stringify(showProductDetail));
+
 
     // Carrito compras traer
     const item = localStorage.getItem('comprarShopi');
@@ -37,8 +46,54 @@ export const ShoppingCartProvider = ({ children }) => {
         localStorage.setItem('checkout', JSON.stringify(order));
     }, [order]);
 
+    //Search flitered
+    const [filteredItems, setFilteredItems] = useState(null);
+
+    // Search by title
+    const [searchByTitle, setSearchByTitle] = useState(null);
+    const filteredItemsByTitle = (items, searchByTitle) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase())) 
+    }
+
+    // Search by category
+    const [searchByCategory, setSearchByCategory] = useState(null);
+    const filteredItemsByCategory = (items, searchByCategory) => {
+        //console.log(items)
+        return items?.filter(item => item.category.toLowerCase().includes(searchByCategory.toLowerCase())) 
+    }
+
+    
+    
+
+    useEffect(() => {
+        const filteredBy = (searchType, items, searchByTitle, searchByCategory) => {
+            if (searchType === 'BY_TITLE') {
+                return filteredItemsByTitle(items, searchByTitle);
+            }
+
+            if (searchType === 'BY_CATEGORY') {
+                return filteredItemsByCategory(items, searchByCategory);
+            }
+
+            if (searchType === 'BY_TITLE_AND_CATEGORY') {
+                return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+            }
+
+            if (!searchType) {
+                return items;
+            }
+        }
+
+        if (searchByTitle && searchByCategory) setFilteredItems(filteredBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+        if (searchByTitle && !searchByCategory) setFilteredItems(filteredBy('BY_TITLE', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && searchByCategory) setFilteredItems(filteredBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && !searchByCategory) setFilteredItems(filteredBy(null, items, searchByTitle, searchByCategory))
+    }, [items, searchByTitle, searchByCategory]);
+
     return (
         <Context.Provider value={{
+            items,
+            setItems,
             openProductDetail,
             closeProductDetail,
             isProductDetailOpen,
@@ -52,6 +107,11 @@ export const ShoppingCartProvider = ({ children }) => {
             closeCheckoutSideMenu,
             order,
             setOrder,
+            filteredItems,
+            searchByTitle,
+            setSearchByTitle,
+            searchByCategory,
+            setSearchByCategory
         }}>
             {children}
         </Context.Provider>

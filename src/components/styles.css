@@ -1,17 +1,19 @@
 /* PRODUC DETAIL */
 .product-detail {
     width: 360px;
-    height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
     top: 100px;
+    border: 1px solid black;
 }
 
 /* CHECKOUT SIDE MENU */
 .checkout-side-menu {
-  width: 360px;
+  width: 280px;
   height: auto;
   max-height: calc(100vh - 100px);
   top: 69px;
   padding-bottom: 20px;
+  border: 1px solid black;
 }
 
 /* RATE STYLES */
@@ -29,6 +31,10 @@
 
 .border-bottom {
   border-bottom: 1px solid rgb(184, 184, 184);
+}
+
+.border-circle {
+  border: 1px solid rgb(184, 184, 184);
 }
 
 /* ------------------------------------------------------------------ */

@@ -28,8 +28,8 @@ export const Footer = () => {
     }, []);
 
     return (
-        <>
-            <div className='flex justify-center items-center mt-12 cursor-pointer text-sm'>
+        <div className='fondo fixed bottom-0 w-full'>
+            <div className='flex justify-center items-center mt-2 cursor-pointer text-sm'>
                 {isVisible && (
                     <div
                         onClick={() => scrollToTop()}
@@ -38,10 +38,10 @@ export const Footer = () => {
                     </div>
                 )}
             </div>
-            <footer className='flex justify-between items-center botton-0 w-full py-5 px-8 text-sm font-light bg-white mt-6'>
+            <footer className='flex justify-between items-center botton-0 py-3 px-8 text-sm font-light'>
                 <p>Shopi</p>
                 <p>By <a href='https://silviajcn.vercel.app/' target='_blank' rel='noreferrer' className='font-semibold'>Silvi</a> 💚</p>
             </footer>
-        </>
+        </div>
     )
 };

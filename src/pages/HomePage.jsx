@@ -1,15 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Card, Layout, ProductDetail } from '../components';
-import { products } from '../assets/products';
+import { Context } from '../context';
+import { GoToTop } from '../utils/goToTop';
 
 export const HomePage = () => {
 
-    const [searchByTitle, setSearchByTitle] = useState(null);
-    console.log(searchByTitle);
-    useEffect(() => {
+    const context = useContext(Context);
+    GoToTop();
 
-    }, [searchByTitle]);
-    
+    const renderView = () => {
+        if (context.filteredItems?.length > 0) {
+            return (
+                context.filteredItems?.map((item) => (
+                    <Card key={item.id} item={item} />
+                ))
+            )
+        } else {
+            return (
+                <p>No results found 😣</p>
+            )
+        }
+            
+    }
+
+
+    //console.log(filteredItems)
+
     // const [items, setItems] = useState(null);
     // useEffect(() => {
     //     fetch('https://api.escuelajs.co/api/v1/products')
@@ -26,15 +42,13 @@ export const HomePage = () => {
                     type='text'
                     placeholder='Search product...'
                     className='border-2 rounded-lg w-full p-3'
-                    onChange={(e) => setSearchByTitle(e.target.value)}
+                    onChange={(e) => context.setSearchByTitle(e.target.value)}
                 />
             </form>
 
             <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
                 {
-                    products?.map((item) => (
-                        <Card key={item.id} item={item} />
-                    ))
+                    renderView()
                 }   
             </div>
             <ProductDetail />

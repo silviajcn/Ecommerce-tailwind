@@ -31,12 +31,15 @@ export const CheckoutSideMenu = () => {
         context.setOrder([...context.order, orderToAdd]);
         context.setCartProducts([]);
         context.closeCheckoutSideMenu();
+        //context.setSearchByTitle(null);
     }
+
+    //console.log(context.cartProducts[0].images[0])
 
     return (
         <aside
-            className={`${context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} checkout-side-menu flex-col fixed right-0 border border-black rounded-lg bg-white`}>
-            <div className='flex justify-between items-center p-6'>
+            className={`${context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} checkout-side-menu flex-col fixed right-0 border border-black rounded-lg fondo`}>
+            <div className='flex justify-between items-center p-4'>
                 <h2 className='font-medium text-xl'>My Order</h2>
                 <div>
                     <XMarkIcon
@@ -44,22 +47,31 @@ export const CheckoutSideMenu = () => {
                         onClick={() => context.closeCheckoutSideMenu()}></XMarkIcon>
                 </div>
             </div>
-            <div className='px-6 mb-4'>
+            <div className='px-4 mb-4'>
                 <p className='flex flex-row justify-between items-center'>
                     <span>Total in the shopping cart:</span>
                     <span className='font-medium text-2xl text-red-800'>${totalPrice(context.cartProducts)}</span>
                 </p>
                 {
                     context.productsCount !== 0 &&
-                    <Link to='/my-orders/last'>
+                    <div>
+                        <Link to='/my-orders/last'>
+                            <button
+                                type='button'
+                                className='border-2 p-2 rounded-lg w-full mt-3 bg-orange-200' 
+                                onClick={() => handleCheckout()}
+                            >
+                                Buy
+                            </button>
+                        </Link>
                         <button
                             type='button'
-                            className='border-2 p-2 rounded-lg w-full mt-3 bg-orange-200' 
-                            onClick={() => handleCheckout()}
+                            onClick={() => context.setCartProducts([])}
+                            className='border-2 p-2 rounded-lg w-full bg-red-200 mt-3'
                         >
-                            Buy
+                            Delete all items
                         </button>
-                    </Link>
+                    </div>
                 }
             </div>
             <hr className='mb-6' />
@@ -70,7 +82,7 @@ export const CheckoutSideMenu = () => {
                             key={prod.id}
                             id={prod.id}
                             title={prod.title}
-                            imageUrl={prod.images}
+                            imageUrl={prod.images[0]}
                             price={prod.price}
                             handleDelete={handleDelete}
                         />

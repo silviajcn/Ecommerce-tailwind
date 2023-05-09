@@ -7,12 +7,8 @@ import { ChevronRightIcon } from '@heroicons/react/24/solid';
 export const OrderPage = () => {
     const context = useContext(Context);
 
-    const currentPath = window.location.pathname
-    let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
-
-    // const { id } = useParams();
-    // const orderItem = context.order
-    // console.log(orderItem)
+    const currentPath = window.location.pathname;
+    let index = currentPath.substring(currentPath.lastIndexOf('/') + 1);
 
     return (
             <Layout>
@@ -29,7 +25,7 @@ export const OrderPage = () => {
                                 key={prod.id}
                                 id={prod.id}
                                 title={prod.title}
-                                imageUrl={prod.images}
+                                imageUrl={prod.images?.[0]}
                                 price={prod.price}
                             />
                         ))
