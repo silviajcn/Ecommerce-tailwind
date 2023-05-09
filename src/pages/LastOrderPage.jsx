@@ -3,10 +3,12 @@ import { Layout, OrderCard } from '../components'
 import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import { GoToTop } from '../utils';
 
 export const LastOrderPage = () => {
 
     const context = useContext(Context);
+    GoToTop();
 
     return (
         <Layout>

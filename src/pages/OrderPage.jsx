@@ -3,9 +3,11 @@ import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import { Layout, OrderCard } from '../components';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import { GoToTop } from '../utils';
 
 export const OrderPage = () => {
     const context = useContext(Context);
+    GoToTop();
 
     const currentPath = window.location.pathname;
     let index = currentPath.substring(currentPath.lastIndexOf('/') + 1);

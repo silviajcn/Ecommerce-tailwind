@@ -4,7 +4,7 @@ import { Context } from '../context';
 import { deliveryDate, today } from '../utils';
 import { Layout } from '../components';
 import { ChevronLeftIcon, StarIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
-import { GoToTop } from '../utils/goToTop';
+import { GoToTop } from '../utils';
 
 export const DetailProduct = () => {
 
@@ -35,7 +35,7 @@ export const DetailProduct = () => {
             <Layout>
                 <div className='w-full max-w-screen-lg'>
                     <button className='flex flex-grow items-center font-light' onClick={onNavigateBack}>
-                        <ChevronLeftIcon className='h-4 w-4 text-black'></ChevronLeftIcon> Volver
+                        <ChevronLeftIcon className='h-4 w-4 text-black'></ChevronLeftIcon> Return
                     </button>
 
                     <div className='flex flex-column w-full mb-10 mt-10'>

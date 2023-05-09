@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Layout, OrderCard } from '../components';
-import { GoToTop } from '../utils/goToTop';
+import { GoToTop } from '../utils';
 import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import { totalPrice } from '../utils';
@@ -59,15 +59,24 @@ export const CartShoppingPage = () => {
                     </p>
                     {
                         context.productsCount !== 0 &&
-                        <Link to='/my-orders/last'>
+                        <div>
+                            <Link to='/my-orders/last'>
+                                <button
+                                    type='button'
+                                    className='border-2 p-2 rounded-lg w-full mt-3 bg-orange-200' 
+                                    onClick={() => handleCheckout()}
+                                >
+                                    Buy
+                                </button>
+                            </Link>
                             <button
                                 type='button'
-                                className='border-2 p-2 rounded-lg w-full mt-3 bg-orange-200' 
-                                onClick={() => handleCheckout()}
+                                onClick={() => context.setCartProducts([])}
+                                className='border-2 p-2 rounded-lg w-full bg-red-200 mt-3'
                             >
-                                Buy
+                                Delete all items
                             </button>
-                        </Link>
+                        </div>
                     }
                 </div>
             </div>

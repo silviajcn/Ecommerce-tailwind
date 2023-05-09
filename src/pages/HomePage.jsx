@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Card, Layout, ProductDetail } from '../components';
 import { Context } from '../context';
-import { GoToTop } from '../utils/goToTop';
+import { GoToTop } from '../utils';
 
 export const HomePage = () => {
 

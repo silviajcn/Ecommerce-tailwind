@@ -34,7 +34,7 @@ export const Footer = () => {
                     <div
                         onClick={() => scrollToTop()}
                     >
-                        <p>Ir al inicio de página</p>
+                        <p>Go to start</p>
                     </div>
                 )}
             </div>
